@@ -77,13 +77,16 @@ executable tec-turing
                     Tipos.Geral
                     Tipos.Sipser
                     Tipos.DuplamenteInfinita
+                    Parser.Tipos
+                    Parser.Algoritmos
 
     -- LANGUAGE extensions used by modules in this package.
     -- other-extensions:
 
     -- Other library packages from which modules are imported.
     build-depends:    
-                    base ^>=4.17.2.1
+                    base ^>=4.17.2.1,
+                    parsec >=3.1.14.0
 
     -- Directories containing source files.
     hs-source-dirs:   
