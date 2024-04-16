@@ -1,50 +1,42 @@
 module Parser.Algoritmos where
 
-import Parser.Tipos ( TuringTuple(TuringTuple) )
 import Text.Parsec
-    ( alphaNum,
+    ( anyChar,
       char,
-      endOfLine,
+      newline,
       noneOf,
       oneOf,
+      endBy,
       many1,
-      optional,
-      (<|>),
-      many )
+      many,
+      parse,
+      ParseError )
 import Text.Parsec.String (Parser)
+import Parser.Tipos ( Instrucao(Instrucao) )
 
--- | O parser 'symbolParser' reconhece um caractere que não seja um dos seguintes: ";", "*", "_", "\n", "\r" ou "\t".
-symbolParser :: Parser Char
-symbolParser = noneOf ";*_\n\r\t "
+-- | O parser para uma única instrução.
+instructionParser :: Parser Instrucao
+instructionParser = do
+  estadoAtual' <- many1 (noneOf " \n")
+  _ <- char ' '
+  simboloAtual' <- anyChar
+  _ <- char ' '
+  novoSimbolo' <- anyChar
+  _ <- char ' '
+  direcao' <- oneOf "l*r"
+  _ <- char ' '
+  novoEstado' <- many1 (noneOf " \n")
+  _ <- many (char ' ')
+  return $ Instrucao estadoAtual' simboloAtual' novoSimbolo' direcao' novoEstado'
 
--- | O parser 'stateParser' reconhece uma sequência de caracteres alfanuméricos ou o caractere "*".
-stateParser :: Parser String
-stateParser = many1 (alphaNum <|> char '*')
+-- | O parser para uma lista de instruções.
+parserInstrucoes :: Parser [Instrucao]
+parserInstrucoes = instructionParser `endBy` newline
 
--- | O parser 'directionParser' reconhece um dos seguintes caracteres: "l", "r", "*" ou "r".
-directionParser :: Parser Char
-directionParser = oneOf "lrr*"
+-- | Remove os comentários de um código.
+removerComentarios :: String -> String
+removerComentarios = unlines . filter (not . null) . map (takeWhile (/= ';')) . lines
 
--- | O parser 'breakpointParser' reconhece o caractere "!".
-breakpointParser :: Parser Char
-breakpointParser = char '!'
-
--- | O parser 'turingTupleParser' reconhece uma tupla de transição da Máquina de Turing.
-turingTupleParser :: Parser TuringTuple
-turingTupleParser = do
-    currentState <- stateParser
-    _ <- char ' '
-    currentSymbol <- symbolParser
-    _ <- char ' '
-    newSymbol <- (char '_' >> return currentSymbol) <|> symbolParser
-    _ <- char ' '
-    direction <- directionParser
-    _ <- char ' '
-    newState <- (char '*' >> return currentState) <|> stateParser
-    optional breakpointParser
-
-    return $ TuringTuple currentState currentSymbol newSymbol direction newState
-
--- | O parser 'turingProgramParser' reconhece uma lista de tuplas de transição da Máquina de Turing, separadas por quebras de linha.
-turingProgramParser :: Parser [TuringTuple]
-turingProgramParser = many (turingTupleParser <* endOfLine)
+-- | Faz o parsing de um código para uma lista de instruções.
+parser :: String -> Either ParseError [Instrucao]
+parser = parse parserInstrucoes "" . removerComentarios
