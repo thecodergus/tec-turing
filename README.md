@@ -1,1 +1,34 @@
-# tec-turing
+# Trabalho de Teoria da computação
+
+## Titulo
+
+Tradutor de Modelos de Máquina de Turing
+
+## Resumo
+
+Este trabalho tem como objetivo desenvolver um tradutor de modelos de máquina de Turing. O tradutor deve ser capaz de ler um arquivo texto com extensão .in contendo um programa de máquina de Turing escrito na sintaxe do simulador online disponível em <http://morphett.info/turing/turing.html>, e produzir um arquivo texto com extensão .out com um programa equivalente para o modelo "oposto" ao de entrada, ou seja, se a entrada for uma máquina de Turing do modelo de Sipser, a saída deve ser uma máquina de Turing de fita duplamente infinita, e vice-versa.
+
+O programa deve ser capaz de ser executado em um computador com sistema operacional Ubuntu 22.04.4 LTS de 64 bits e deve ser escrito em uma linguagem de programação de escolha livre. Os arquivos de entrada devem conter apenas máquinas de Turing determinísticas e codificação válida para o simulador, e o alfabeto da fita deve ser constituído exclusivamente de letras (maiúsculas e minúsculas) e dígitos.
+
+A entrega do trabalho deve conter o programa final, instruções claras de execução e o endereço de um repositório público no GitHub com todo o código-fonte. Quaisquer dúvidas a respeito do trabalho devem ser postadas no fórum de dúvidas da disciplina.
+
+
+## Regras
+
+
+### Sintaxe
+
+- Cada linha deve conter uma tupla na forma '(símbolo atual) (novo símbolo) (direção) (novo estado)'.
+- Você pode usar qualquer número ou palavra para (estado atual) e (novo estado), por exemplo, 10, a, estado1. Os rótulos de estado diferenciam maiúsculas de minúsculas.
+- Você pode usar quase qualquer caractere para (símbolo atual) e (novo símbolo), ou '_' para representar em branco (espaço). Os símbolos diferenciam maiúsculas de minúsculas.
+- Não é possível usar ';', '*', '_' ou espaço em branco como símbolos.
+- (direção) deve ser 'l', 'r' ou '*', denotando 'mover para a esquerda', 'mover para a direita' ou 'não se mover', respectivamente.
+- Qualquer coisa após um ';' é um comentário e é ignorada.
+- A máquina para quando alcança qualquer estado começando com 'halt', por exemplo, halt, halt-accept.
+
+### Além disso
+
+- '*' pode ser usado como curinga em (símbolo atual) ou (estado atual) para corresponder a qualquer caractere ou estado.
+- '*' pode ser usado em (novo símbolo) ou (novo estado) para significar 'sem alteração'.
+- '!' pode ser usado no final de uma linha para definir um ponto de interrupção, por exemplo, '1 a b r 2 !'. A máquina pausará automaticamente após executar esta linha.
+- Você pode especificar a posição inicial para a cabeça usando '*' na entrada inicial.
