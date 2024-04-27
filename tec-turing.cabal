@@ -74,9 +74,7 @@ executable tec-turing
 
     -- Modules included in this executable, other than Main.
     other-modules:
-                    Tipos.Geral
-                    Tipos.Sipser
-                    Tipos.DuplamenteInfinita
+                    Tipos
                     Parser.Tipos
                     Parser.Algoritmos
 
