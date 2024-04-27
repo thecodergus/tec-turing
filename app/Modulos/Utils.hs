@@ -32,8 +32,8 @@ instrucoesParaMaquinaTuring instrucoes = Tipos.MaquinaTuring {
             instrucaoParaTransicao :: Parser.Instrucao -> Tipos.Transicao
             instrucaoParaTransicao (Parser.Instrucao estadoAtual simboloAtual novoSimbolo direcao novoEstado) = Tipos.Transicao {
                 Tipos.estadoAtual = Tipos.Estado estadoAtual,
-                Tipos.simboloAtual = Tipos.Simbolo [simboloAtual],
-                Tipos.simboloSerEscrito = Tipos.Simbolo [novoSimbolo],
+                Tipos.simboloAtual = simbolo simboloAtual,
+                Tipos.simboloSerEscrito = simbolo novoSimbolo,
                 Tipos.direcao = direcaoParaDirecao direcao,
                 Tipos.proximoEstado = Tipos.Estado novoEstado
             }
@@ -42,6 +42,10 @@ instrucoesParaMaquinaTuring instrucoes = Tipos.MaquinaTuring {
                     direcaoParaDirecao 'l' = Tipos.Esquerda
                     direcaoParaDirecao 'r' = Tipos.Direita
                     direcaoParaDirecao _ = Tipos.Parado
+
+                    simbolo :: Char -> Tipos.Simbolo
+                    simbolo '_' = Tipos.Vazio
+                    simbolo simbolo' = Tipos.Simbolo [simbolo']
 
     definirEstadoInicial :: Tipos.Estado
     definirEstadoInicial = Tipos.Estado "0"
