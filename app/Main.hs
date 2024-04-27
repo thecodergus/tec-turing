@@ -1,7 +1,7 @@
 module Main where
 
 import Parser.Algoritmos ( removerComentarios, parser ) 
-
+import Utils (instrucoesParaMaquinaTuring)
 
 main :: IO ()
 main = do
@@ -12,6 +12,13 @@ main = do
     print "Input limpo:"
     print $ removerComentarios input
     print "Instrucoes:"
-    print $ parser input
+    let retorno = parser input
 
-
+    case retorno of
+        Left erro -> print erro
+        Right instrucoes -> do
+            print "Instrucoes:"
+            print instrucoes
+            let maquina = instrucoesParaMaquinaTuring instrucoes
+            print "Maquina:"
+            print maquina
