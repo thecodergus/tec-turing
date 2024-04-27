@@ -24,6 +24,7 @@ instrucoesParaMaquinaTuring instrucoes = Tipos.MaquinaTuring {
         alfabeto [] listaFinal = listaFinal
         alfabeto (Parser.Instrucao _ simboloAtual _ _ _ : xs) listaSimbolos
           | simboloAtual `notElem` listaSimbolos = alfabeto xs (listaSimbolos ++ [simboloAtual])
+          | simboloAtual == '_' || simboloAtual == '*' = alfabeto xs listaSimbolos
           | otherwise = alfabeto xs listaSimbolos
 
     definirTransicoes :: [Parser.Instrucao] -> [Tipos.Transicao]
@@ -46,6 +47,7 @@ instrucoesParaMaquinaTuring instrucoes = Tipos.MaquinaTuring {
 
                     simbolo :: Char -> Tipos.Simbolo
                     simbolo '_' = Tipos.Vazio
+                    simbolo '*' = Tipos.Manter
                     simbolo simbolo' = Tipos.Simbolo [simbolo']
 
     definirEstadoInicial :: Tipos.Estado

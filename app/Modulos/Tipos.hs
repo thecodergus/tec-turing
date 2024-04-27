@@ -5,6 +5,7 @@ module Tipos where
 data Simbolo
   = Simbolo String -- Símbolo que representa uma letra
   | Vazio -- Símbolo que representa o espaço vazio
+  | Manter -- Símbolo que representa a ordem de manter o símbolo atual
   deriving (Show, Eq)
 
 -- Define os estados da máquina de Turing
