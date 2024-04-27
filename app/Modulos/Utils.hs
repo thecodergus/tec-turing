@@ -41,7 +41,8 @@ instrucoesParaMaquinaTuring instrucoes = Tipos.MaquinaTuring {
                     direcaoParaDirecao :: Char -> Tipos.Direcao
                     direcaoParaDirecao 'l' = Tipos.Esquerda
                     direcaoParaDirecao 'r' = Tipos.Direita
-                    direcaoParaDirecao _ = Tipos.Parado
+                    direcaoParaDirecao '*' = Tipos.Parado
+                    direcaoParaDirecao _ = error "Instrução de direção inválida"
 
                     simbolo :: Char -> Tipos.Simbolo
                     simbolo '_' = Tipos.Vazio
