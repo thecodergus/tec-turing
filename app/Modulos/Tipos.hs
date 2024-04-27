@@ -26,7 +26,7 @@ data Transicao = Transicao{
   simboloSerEscrito :: Simbolo, -- Símbolo a ser escrito
   direcao :: Direcao, -- Direção da cabeça a ser seguida
   proximoEstado :: Estado -- Próximo estado
-}
+} deriving (Show, Eq)
 
 -- Define a máquina de Turing
 data MaquinaTuring = MaquinaTuring{
@@ -34,5 +34,4 @@ data MaquinaTuring = MaquinaTuring{
   alfabeto :: [Simbolo], -- Alfabeto
   transicoes :: [Transicao], -- Lista de transições
   estadoInicial :: Estado, -- Estado inicial
-  estadosFinais :: [Estado] -- Lista de estados finais
-}
+} deriving (Show, Eq)

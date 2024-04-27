@@ -1,8 +1,6 @@
 module Main where
 
-import Parser.Algoritmos 
-import System.IO (readFile)
-import Parser.Tipos (Instrucao(estadoAtual))
+import Parser.Algoritmos ( removerComentarios, parser ) 
 
 
 main :: IO ()
@@ -16,6 +14,4 @@ main = do
     print "Instrucoes:"
     print $ parser input
 
-    -- Imprindo todos os estados
-    print "Estados:"
-    either print (print . map estadoAtual) (parser input)
+
