@@ -33,5 +33,5 @@ data MaquinaTuring = MaquinaTuring{
   estados :: [Estado], -- Lista de estados
   alfabeto :: [Simbolo], -- Alfabeto
   transicoes :: [Transicao], -- Lista de transições
-  estadoInicial :: Estado, -- Estado inicial
+  estadoInicial :: Estado -- Estado inicial
 } deriving (Show, Eq)
