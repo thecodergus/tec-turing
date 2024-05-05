@@ -2,13 +2,15 @@ module Utils where
 
 import qualified Tipos
 import qualified Parser.Tipos as Parser
+import Tipos (Tipo)
 
-instrucoesParaMaquinaTuring :: [Parser.Instrucao] -> Tipos.MaquinaTuring
-instrucoesParaMaquinaTuring instrucoes = Tipos.MaquinaTuring {
+instrucoesParaMaquinaTuring :: (Tipo, [Parser.Instrucao]) -> Tipos.MaquinaTuring
+instrucoesParaMaquinaTuring (tipo, instrucoes) = Tipos.MaquinaTuring {
   Tipos.estados = encontrarEstados instrucoes [],
   Tipos.alfabeto = definirAlfabeto instrucoes,
   Tipos.transicoes = definirTransicoes instrucoes,
-  Tipos.estadoInicial = definirEstadoInicial
+  Tipos.estadoInicial = definirEstadoInicial,
+  Tipos.tipo = tipo
 }
   where
     encontrarEstados :: [Parser.Instrucao] -> [String] -> [Tipos.Estado]

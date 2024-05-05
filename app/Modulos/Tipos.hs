@@ -40,6 +40,5 @@ data MaquinaTuring = MaquinaTuring{
   alfabeto :: [Simbolo], -- Alfabeto
   transicoes :: [Transicao], -- Lista de transições
   estadoInicial :: Estado, -- Estado inicial
-  estadoFinal :: [Estado], -- Estado final
   tipo :: Tipo -- Tipo da máquina
 } deriving (Show, Eq)
