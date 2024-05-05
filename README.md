@@ -32,3 +32,22 @@ A entrega do trabalho deve conter o programa final, instruções claras de execu
 - '*' pode ser usado em (novo símbolo) ou (novo estado) para significar 'sem alteração'.
 - '!' pode ser usado no final de uma linha para definir um ponto de interrupção, por exemplo, '1 a b r 2 !'. A máquina pausará automaticamente após executar esta linha.
 - Você pode especificar a posição inicial para a cabeça usando '*' na entrada inicial.
+
+
+## Estrategias
+
+### Para qualquer entrada
+
+- A configuração programa será encapsulada por hashtags (#). Programa exemplo:
+  
+```
+    0 0 # r q0
+    0 1 # r q1
+    q0 0 0 r q0
+    q0 1 0 r q1
+    q0 _ 0 r qf
+    q1 0 1 r q0
+    q1 1 1 r q1 
+    q1 _ 1 r qf
+    qf _ # * halt
+```
