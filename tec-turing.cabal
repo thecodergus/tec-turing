@@ -78,6 +78,7 @@ executable tec-turing
                     Parser.Tipos
                     Parser.Algoritmos
                     Utils
+                    Algoritmos
                     Algoritmos.Sipser
                     Algoritmos.DuplamenteInfinita
 
