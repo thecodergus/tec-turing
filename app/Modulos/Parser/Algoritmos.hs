@@ -13,6 +13,8 @@ import Text.Parsec
       ParseError )
 import Text.Parsec.String (Parser)
 import Parser.Tipos ( Instrucao(Instrucao) )
+import Data.Bifunctor
+import Tipos (Tipo (DuplamenteInfinita, Sipser))
 
 -- | O parser para uma única instrução.
 instructionParser :: Parser Instrucao
@@ -34,9 +36,14 @@ parserInstrucoes :: Parser [Instrucao]
 parserInstrucoes = instructionParser `endBy` newline
 
 -- | Remove os comentários de um código.
-removerComentarios :: String -> String
-removerComentarios = unlines . filter (not . null) . map (takeWhile (/= ';')) . lines
+removerComentarios :: String -> (Tipo, String)
+removerComentarios str = (definirTipo $ head $ lines str, unlines . filter (not . null) . map (takeWhile (/= ';')) $ lines str)
+  where
+    definirTipo :: String -> Tipo
+    definirTipo ";I" = DuplamenteInfinita
+    definirTipo ";S" = Sipser
+    definirTipo _ = error "Tipo de máquina não reconhecido."
 
 -- | Faz o parsing de um código para uma lista de instruções.
-parser :: String -> Either ParseError [Instrucao]
-parser = parse parserInstrucoes "" . removerComentarios
+parser :: String -> (Tipo, Either ParseError [Instrucao])
+parser str = second (parse parserInstrucoes "") (removerComentarios str)

@@ -14,11 +14,5 @@ main = do
     print "Instrucoes:"
     let retorno = parser input
 
-    case retorno of
-        Left erro -> print erro
-        Right instrucoes -> do
-            print "Instrucoes:"
-            print instrucoes
-            let maquina = instrucoesParaMaquinaTuring instrucoes
-            print "Maquina:"
-            print maquina
+    print $ fst retorno
+    print $ snd retorno
