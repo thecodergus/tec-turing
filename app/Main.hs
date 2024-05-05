@@ -1,6 +1,6 @@
 module Main where
 
-import Parser.Algoritmos ( removerComentarios, parser ) 
+import Parser.Algoritmos (parser) 
 import Utils (instrucoesParaMaquinaTuring)
 
 main :: IO ()

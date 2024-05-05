@@ -78,7 +78,8 @@ executable tec-turing
                     Parser.Tipos
                     Parser.Algoritmos
                     Utils
-                    Algoritmos
+                    Algoritmos.Sipser
+                    Algoritmos.DuplamenteInfinita
 
     -- LANGUAGE extensions used by modules in this package.
     -- other-extensions:
@@ -93,6 +94,7 @@ executable tec-turing
                     app
                     app/Modulos
                     app/Modulos/Tipos
+                    app/Modulos/Algoritmos
 
     -- Base language which the package is written in.
     default-language: 
