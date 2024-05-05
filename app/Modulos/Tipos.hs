@@ -1,6 +1,11 @@
 module Tipos where
 
 
+-- Define o tipo da máquina de Turing da atual configuração
+data Tipo = Sipser 
+          | DuplamenteInfinita 
+          deriving (Show, Eq)
+
 -- Define os símbolos usados na fita da máquina de Turing
 data Simbolo
   = Simbolo String -- Símbolo que representa uma letra
@@ -34,5 +39,7 @@ data MaquinaTuring = MaquinaTuring{
   estados :: [Estado], -- Lista de estados
   alfabeto :: [Simbolo], -- Alfabeto
   transicoes :: [Transicao], -- Lista de transições
-  estadoInicial :: Estado -- Estado inicial
+  estadoInicial :: Estado, -- Estado inicial
+  estadoFinal :: [Estado], -- Estado final
+  tipo :: Tipo -- Tipo da máquina
 } deriving (Show, Eq)
