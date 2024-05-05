@@ -51,3 +51,12 @@ A entrega do trabalho deve conter o programa final, instruções claras de execu
     q1 _ 1 r qf
     qf _ # * halt
 ```
+
+### Quando a entrada é uma maquina de Turing de fita duplamente infinita e a saída é uma maquina de Turing de Sipser
+
+Quando a entrada é uma maquina de Turing de fita duplamente infinita e a saída é uma maquina de Turing de Sipser, a estratégia é a seguinte:
+ 
+- O primeiro espaço após a hashtag vira um espaço em branco.
+- Vai movendo todos os simbolos da fita para a direita até encontrar um espaço em branco.
+- Quando encontrar um espaço em branco, ele vai para a direita até encontrar o simbolo que estava no primeiro espaço em branco.
+- Quando encontrar o simbolo que estava no primeiro espaço em branco, ele vai executar o programa normalmente a partir do estado mais a esquerda que precisava do espaço em branco mais a esquerda.
