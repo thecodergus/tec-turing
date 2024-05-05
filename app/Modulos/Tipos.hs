@@ -11,6 +11,7 @@ data Simbolo
   = Simbolo String -- Símbolo que representa uma letra
   | Vazio -- Símbolo que representa o espaço vazio
   | Manter -- Símbolo que representa a ordem de manter o símbolo atual
+  | Todos -- Simbolo que representa a ordem de aceitar todos os simbolos
   deriving (Show, Eq)
 
 -- Define os estados da máquina de Turing

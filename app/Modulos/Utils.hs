@@ -33,10 +33,10 @@ instrucoesParaMaquinaTuring (tipo, instrucoes) = Tipos.MaquinaTuring {
     definirTransicoes = map instrucaoParaTransicao
         where
             instrucaoParaTransicao :: Parser.Instrucao -> Tipos.Transicao
-            instrucaoParaTransicao (Parser.Instrucao estadoAtual simboloAtual novoSimbolo direcao novoEstado) = Tipos.Transicao {
+            instrucaoParaTransicao (Parser.Instrucao estadoAtual simboloAtual' novoSimbolo direcao novoEstado) = Tipos.Transicao {
                 Tipos.estadoAtual = Tipos.Estado estadoAtual,
-                Tipos.simboloAtual = simbolo simboloAtual,
-                Tipos.simboloSerEscrito = simbolo novoSimbolo,
+                Tipos.simboloAtual = simboloAtual simboloAtual',
+                Tipos.simboloSerEscrito = simboloNovo novoSimbolo,
                 Tipos.direcao = direcaoParaDirecao direcao,
                 Tipos.proximoEstado = Tipos.Estado novoEstado
             }
@@ -47,10 +47,15 @@ instrucoesParaMaquinaTuring (tipo, instrucoes) = Tipos.MaquinaTuring {
                     direcaoParaDirecao '*' = Tipos.Parado
                     direcaoParaDirecao _ = error "Instrução de direção inválida"
 
-                    simbolo :: Char -> Tipos.Simbolo
-                    simbolo '_' = Tipos.Vazio
-                    simbolo '*' = Tipos.Manter
-                    simbolo simbolo' = Tipos.Simbolo [simbolo']
+                    simboloAtual :: Char -> Tipos.Simbolo
+                    simboloAtual '_' = Tipos.Vazio
+                    simboloAtual '*' = Tipos.Todos
+                    simboloAtual simbolo' = Tipos.Simbolo [simbolo']
+
+                    simboloNovo :: Char -> Tipos.Simbolo
+                    simboloNovo '_' = Tipos.Vazio
+                    simboloNovo '*' = Tipos.Manter
+                    simboloNovo simbolo' = Tipos.Simbolo [simbolo']
 
     definirEstadoInicial :: Tipos.Estado
     definirEstadoInicial = Tipos.Estado "0"
