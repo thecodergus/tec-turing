@@ -78,6 +78,7 @@ executable tec-turing
                     Parser.Tipos
                     Parser.Algoritmos
                     Utils
+                    Algoritmos
 
     -- LANGUAGE extensions used by modules in this package.
     -- other-extensions:
