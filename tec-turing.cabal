@@ -87,7 +87,7 @@ executable tec-turing
 
     -- Other library packages from which modules are imported.
     build-depends:    
-                    base ^>=4.17.2.1,
+                    base ^>=4.13.0.0,
                     parsec >=3.1.14.0
 
     -- Directories containing source files.
