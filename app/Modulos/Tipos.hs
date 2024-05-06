@@ -1,3 +1,4 @@
+{-# LANGUAGE GADTs #-}
 module Tipos where
 
 
@@ -8,11 +9,17 @@ data Tipo = Sipser
 
 -- Define os símbolos usados na fita da máquina de Turing
 data Simbolo
-  = Simbolo String -- Símbolo que representa uma letra
-  | Vazio -- Símbolo que representa o espaço vazio
-  | Manter -- Símbolo que representa a ordem de manter o símbolo atual
-  | Todos -- Simbolo que representa a ordem de aceitar todos os simbolos
-  deriving (Show, Eq)
+  = Simbolo String
+  | Vazio
+  deriving (Show)
+
+data SimboloAtual = SimboloAtual Simbolo
+                  | Todos
+                  deriving (Show)
+
+data SimboloSerEscrito = SimboloSerEscrito Simbolo
+                        | Manter
+                        deriving (Show)
 
 -- Define os estados da máquina de Turing
 newtype Estado
@@ -29,11 +36,11 @@ data Direcao
 -- Define a transição da máquina de Turing
 data Transicao = Transicao{
   estadoAtual :: Estado, -- Estado atual
-  simboloAtual :: Simbolo, -- Símbolo atual
-  simboloSerEscrito :: Simbolo, -- Símbolo a ser escrito
+  simboloAtual :: SimboloAtual, -- Símbolo atual
+  simboloSerEscrito :: SimboloSerEscrito, -- Símbolo a ser escrito
   direcao :: Direcao, -- Direção da cabeça a ser seguida
   proximoEstado :: Estado -- Próximo estado
-} deriving (Show, Eq)
+} deriving (Show)
 
 -- Define a máquina de Turing
 data MaquinaTuring = MaquinaTuring{
@@ -42,4 +49,4 @@ data MaquinaTuring = MaquinaTuring{
   transicoes :: [Transicao], -- Lista de transições
   estadoInicial :: Estado, -- Estado inicial
   tipo :: Tipo -- Tipo da máquina
-} deriving (Show, Eq)
+} deriving (Show)

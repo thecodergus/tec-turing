@@ -47,15 +47,15 @@ instrucoesParaMaquinaTuring (tipo, instrucoes) = Tipos.MaquinaTuring {
                     direcaoParaDirecao '*' = Tipos.Parado
                     direcaoParaDirecao _ = error "Instrução de direção inválida"
 
-                    simboloAtual :: Char -> Tipos.Simbolo
-                    simboloAtual '_' = Tipos.Vazio
+                    simboloAtual :: Char -> Tipos.SimboloAtual
+                    simboloAtual '_' = Tipos.SimboloAtual Tipos.Vazio
                     simboloAtual '*' = Tipos.Todos
-                    simboloAtual simbolo' = Tipos.Simbolo [simbolo']
+                    simboloAtual simbolo' = Tipos.SimboloAtual $ Tipos.Simbolo [simbolo']
 
-                    simboloNovo :: Char -> Tipos.Simbolo
-                    simboloNovo '_' = Tipos.Vazio
+                    simboloNovo :: Char -> Tipos.SimboloSerEscrito
+                    simboloNovo '_' = Tipos.SimboloSerEscrito Tipos.Vazio
                     simboloNovo '*' = Tipos.Manter
-                    simboloNovo simbolo' = Tipos.Simbolo [simbolo']
+                    simboloNovo simbolo' = Tipos.SimboloSerEscrito $ Tipos.Simbolo [simbolo']
 
     definirEstadoInicial :: Tipos.Estado
     definirEstadoInicial = Tipos.Estado "0"
