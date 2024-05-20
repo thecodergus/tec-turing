@@ -3,8 +3,8 @@ import qualified Tipos
 import Text.Read (Lexeme(String))
 
 
--- salvarArquivo :: Tipos.MaquinaTuring -> String -> IO ()
--- salvarArquivo mt nomeOutput = writeFile nomeOutput ()
+salvarArquivo :: Tipos.MaquinaTuring -> String -> IO ()
+salvarArquivo mt nomeOutput = writeFile nomeOutput (converterParaString mt)
 
 
 converterParaString :: Tipos.MaquinaTuring -> String
