@@ -3,6 +3,7 @@ module Utils where
 import qualified Tipos
 import qualified Parser.Tipos as Parser
 import Tipos (Tipo)
+import Control.Monad (liftM2, replicateM)
 
 instrucoesParaMaquinaTuring :: (Tipo, [Parser.Instrucao]) -> Tipos.MaquinaTuring
 instrucoesParaMaquinaTuring (tipo, instrucoes) = Tipos.MaquinaTuring {
@@ -58,3 +59,12 @@ instrucoesParaMaquinaTuring (tipo, instrucoes) = Tipos.MaquinaTuring {
 
     definirEstadoInicial :: Tipos.Estado
     definirEstadoInicial = Tipos.Estado "0"
+
+
+-- Gera uma lista de pares do estilo todos para todos
+gerarPares :: [a] -> [(a, a)]
+gerarPares xs = concatMap (`gerarPares'` xs) xs
+  where
+    gerarPares' :: a -> [a] -> [(a, a)]
+    gerarPares' _ [] = []
+    gerarPares' a (b : bs) = (a, b) : gerarPares' a bs
