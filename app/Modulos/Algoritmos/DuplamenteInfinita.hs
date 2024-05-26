@@ -13,8 +13,8 @@ converterParaSipser (MaquinaTuring estados' alfabeto' transicoes' estadoInicial'
             passoDois alfabeto' ++ 
             passoTres alfabeto' (alfabeto' ++ [Vazio]) ++ 
             passoQuatro ++
-            passoCinco (alfabeto' ++ [Vazio])
-            -- passoSeis estados' (alfabeto' ++ [Vazio])
+            passoCinco (alfabeto' ++ [Vazio]) ++
+            passoSeis estados' (alfabeto' ++ [Vazio])
         ) 
         estadoInicial' 
         Sipser
@@ -76,8 +76,10 @@ converterParaSipser (MaquinaTuring estados' alfabeto' transicoes' estadoInicial'
             [passoSeis' e] ++
             passoSeis'' e alfabeto''' ++
             passoSeis''' e alfabeto''' alfabeto''' ++
-            [passoSeis'''' e] ++
+            passoSeis'''' e ++
+            [passoSeis''''' e] ++
             passoSeis es alfabeto'''
+
             where
                 -- Ao estado encontrar o #, mover a cabeça para a direita com [<estado>]-mover-direita
                 passoSeis' :: Estado -> Transicao
@@ -109,10 +111,13 @@ converterParaSipser (MaquinaTuring estados' alfabeto' transicoes' estadoInicial'
                         passoSeis'''aux' (Estado e'') Vazio = Transicao (Estado ("[" ++ e'' ++ "]-quase-retornar")) (SimboloAtual Vazio) (SimboloSerEscrito Vazio) Esquerda (Estado ("[" ++ e'' ++ "]-retornar"))
 
 
-                -- -- Ao encontrar o final da fita, retornar para o estado que encontrou o #
-                passoSeis'''' :: Estado -> Transicao
-                passoSeis'''' (Estado e') = Transicao {simboloSerEscrito = SimboloSerEscrito Vazio, proximoEstado = Estado ("[" ++ e' ++ "]-retornar"), simboloAtual = SimboloAtual Vazio, estadoAtual = Estado ("[" ++ e' ++ "]-mover-direita-{}"), direcao = Esquerda}
+                -- Ao encontrar o final da fita, retornar para o estado que encontrou o #
+                passoSeis'''' :: Estado -> [Transicao]
+                passoSeis'''' (Estado e') = [
+                        Transicao {simboloSerEscrito = SimboloSerEscrito Vazio, proximoEstado = Estado ("[" ++ e' ++ "]-retornar"), simboloAtual = SimboloAtual Vazio, estadoAtual = Estado ("[" ++ e' ++ "]-mover-direita-{}"), direcao = Esquerda},
+                        Transicao {simboloSerEscrito = Manter, proximoEstado = Estado ("[" ++ e' ++ "]-retornar"), simboloAtual = Todos, estadoAtual = Estado ("[" ++ e' ++ "]-retornar"), direcao = Esquerda}
+                    ] 
 
                 -- -- Ao encontrar o #, retornar para o estado que encontrou o #
-                -- passoSeis'''' :: Estado -> Transicao
-                -- passoSeis'''' (Estado e') = Transicao {simboloSerEscrito = SimboloSerEscrito Vazio, proximoEstado = Estado e', simboloAtual = SimboloAtual (Simbolo "#"), estadoAtual = Estado ("[" ++ e' ++ "]-retornar"), direcao = Direita}
+                passoSeis''''' :: Estado -> Transicao
+                passoSeis''''' e'@(Estado e'') = Transicao {simboloSerEscrito = Manter, proximoEstado = e', simboloAtual = SimboloAtual (Simbolo "#"), estadoAtual = Estado ("[" ++ e'' ++ "]-retornar"), direcao = Direita}
