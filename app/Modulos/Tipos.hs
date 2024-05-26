@@ -11,7 +11,7 @@ data Tipo = Sipser
 data Simbolo
   = Simbolo String
   | Vazio
-  deriving (Show)
+  deriving (Show, Eq)
 
 --- A justifica para separar a tipagem de Simbolo Atual e Simbolo a ser escrito é que "*" ganha propriedades diferentes tanto em um quanto no outro, enquanto no simbolo atual ele se refere "a qualque simbolo" no simbolo a ser escrito ele se refere a "manter o simbolo atual"
 
