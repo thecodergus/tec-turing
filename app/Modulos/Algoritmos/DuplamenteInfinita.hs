@@ -93,11 +93,10 @@ converterParaSipser (MaquinaTuring estados' alfabeto' transicoes' estadoInicial'
 
                 -- Adicionando os estados de transição
                 passoSeis''' :: Estado -> [Simbolo] -> [Simbolo] -> [Transicao]
-                passoSeis''' _ [] _ = []
+                passoSeis''' e' [] alfabeto'' = map (passoSeis'''aux' e') alfabeto''
                 passoSeis''' _ _ [] = []
                 passoSeis''' e' (s : ss) alfabeto'' =
                     map (passoSeis'''aux e' s) alfabeto'' ++
-                    map (passoSeis'''aux' e') alfabeto'' ++
                     passoSeis''' e' ss alfabeto''
                     where
                         passoSeis'''aux :: Estado -> Simbolo -> Simbolo -> Transicao
@@ -106,9 +105,9 @@ converterParaSipser (MaquinaTuring estados' alfabeto' transicoes' estadoInicial'
                         passoSeis'''aux (Estado e'') (Simbolo x) (Simbolo simb) = Transicao (Estado ("[" ++ e'' ++ "]-mover-direita-{" ++ x ++ "}")) (SimboloAtual (Simbolo simb)) (SimboloSerEscrito (Simbolo x)) Direita (Estado ("[" ++ e'' ++ "]-mover-direita-{" ++ simb ++ "}"))
                         passoSeis'''aux (Estado e'') (Simbolo x) Vazio = Transicao (Estado ("[" ++ e'' ++ "]-mover-direita-{" ++ x ++ "}")) (SimboloAtual Vazio) (SimboloSerEscrito (Simbolo x)) Direita (Estado ("[" ++ e'' ++ "]-mover-direita-{}"))
 
-                        passoSeis'''aux' :: Estado -> Simbolo -> Transicao
-                        passoSeis'''aux' (Estado e'') (Simbolo s') = Transicao (Estado ("[" ++ e'' ++ "]-quase-retornar")) (SimboloAtual (Simbolo s')) (SimboloSerEscrito Vazio) Esquerda (Estado ("[" ++ e'' ++ "]-mover-direita-{" ++ s' ++ "}"))
-                        passoSeis'''aux' (Estado e'') Vazio = Transicao (Estado ("[" ++ e'' ++ "]-quase-retornar")) (SimboloAtual Vazio) (SimboloSerEscrito Vazio) Esquerda (Estado ("[" ++ e'' ++ "]-retornar"))
+                passoSeis'''aux' :: Estado -> Simbolo -> Transicao
+                passoSeis'''aux' (Estado e'') (Simbolo s') = Transicao (Estado ("[" ++ e'' ++ "]-quase-retornar")) (SimboloAtual (Simbolo s')) (SimboloSerEscrito Vazio) Esquerda (Estado ("[" ++ e'' ++ "]-mover-direita-{" ++ s' ++ "}"))
+                passoSeis'''aux' (Estado e'') Vazio = Transicao (Estado ("[" ++ e'' ++ "]-quase-retornar")) (SimboloAtual Vazio) (SimboloSerEscrito Vazio) Esquerda (Estado ("[" ++ e'' ++ "]-retornar"))
 
 
                 -- Ao encontrar o final da fita, retornar para o estado que encontrou o #
