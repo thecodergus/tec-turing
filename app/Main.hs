@@ -1,11 +1,12 @@
 module Main where
 
-import Parser.Algoritmos (parser) 
+import Parser.Algoritmos (parser)
 import Utils (instrucoesParaMaquinaTuring)
 import Algoritmos.Sipser (conveterParaDuplamenteInfinita)
 import Algoritmos (salvarArquivo)
 import Tipos (Tipo (..))
 import Algoritmos.DuplamenteInfinita (converterParaSipser)
+import Control.Monad (void)
 
 main :: IO ()
 main = do
@@ -21,13 +22,7 @@ main = do
         Right instrucoes -> do
             let maquina' = instrucoesParaMaquinaTuring (tipo, instrucoes)
             case tipo of
-                Sipser -> do
-                    let maquinaSipser = conveterParaDuplamenteInfinita maquina'
-                    _ <- salvarArquivo maquinaSipser (pathFile ++ ".out")
-                    return ()
-                DuplamenteInfinita -> do
-                    let maquinaDuplamenteInfinita = converterParaSipser maquina'
-                    _ <- salvarArquivo maquinaDuplamenteInfinita (pathFile ++ ".out")
-                    return ()
+                Sipser -> void $ salvarArquivo (conveterParaDuplamenteInfinita maquina') (pathFile ++ ".out")
+                DuplamenteInfinita -> void $ salvarArquivo (converterParaSipser maquina') (pathFile ++ ".out")
 
     putStrLn $ "Arquivo gerado com sucesso em " ++ pathFile ++ ".out"
