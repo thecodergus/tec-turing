@@ -19,10 +19,9 @@ main = do
 
     case maquina of
         Left erro -> print erro
-        Right instrucoes -> do
-            let maquina' = instrucoesParaMaquinaTuring (tipo, instrucoes)
+        Right instrucoes ->
             case tipo of
-                Sipser -> void $ salvarArquivo (conveterParaDuplamenteInfinita maquina') (pathFile ++ ".out")
-                DuplamenteInfinita -> void $ salvarArquivo (converterParaSipser maquina') (pathFile ++ ".out")
+                Sipser -> void $ salvarArquivo (conveterParaDuplamenteInfinita (instrucoesParaMaquinaTuring (tipo, instrucoes))) (pathFile ++ ".out")
+                DuplamenteInfinita -> void $ salvarArquivo (converterParaSipser (instrucoesParaMaquinaTuring (tipo, instrucoes))) (pathFile ++ ".out")
 
     putStrLn $ "Arquivo gerado com sucesso em " ++ pathFile ++ ".out"
