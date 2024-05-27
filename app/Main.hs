@@ -4,18 +4,30 @@ import Parser.Algoritmos (parser)
 import Utils (instrucoesParaMaquinaTuring)
 import Algoritmos.Sipser (conveterParaDuplamenteInfinita)
 import Algoritmos (salvarArquivo)
-import Tipos (transicoes)
+import Tipos (Tipo (..))
 import Algoritmos.DuplamenteInfinita (converterParaSipser)
 
 main :: IO ()
 main = do
-    input <- readFile "/home/udesc/Documentos/tec-turing/teste_duplamente_infinita.txt"
-    let retorno = parser input
+    putStrLn "Digite o caminho do arquivo de entrada:"
+    putStrLn "Se ele for de Sipser, vai converter para a duplamente infinita e o inverso tambem ocorrera."
+    pathFile <- getLine
+    input <- readFile pathFile
 
-    case snd retorno of
+    let (tipo, maquina) = parser input
+
+    case maquina of
         Left erro -> print erro
         Right instrucoes -> do
-            let maquina = instrucoesParaMaquinaTuring (fst retorno, instrucoes)
-            let maquina' = converterParaSipser maquina
-            _ <- salvarArquivo maquina' "/home/udesc/Documentos/tec-turing/output.out"
-            print maquina
+            let maquina' = instrucoesParaMaquinaTuring (tipo, instrucoes)
+            case tipo of
+                Sipser -> do
+                    let maquinaSipser = converterParaSipser maquina'
+                    _ <- salvarArquivo maquinaSipser (pathFile ++ ".out")
+                    return ()
+                DuplamenteInfinita -> do
+                    let maquinaDuplamenteInfinita = conveterParaDuplamenteInfinita maquina'
+                    _ <- salvarArquivo maquinaDuplamenteInfinita (pathFile ++ ".out")
+                    return ()
+
+    putStrLn $ "Arquivo gerado com sucesso em " ++ pathFile ++ ".out"
