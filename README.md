@@ -72,7 +72,8 @@ Quando a entrada é uma maquina de Turing de fita duplamente infinita e a saída
 
 ### Executando o algoritmo
 
-1. Dentro da pasta do projeto, execute ```cabal run```
-2. O programa irá pedir o caminho completo do arquivo de entrada .in
-3. Dê ao programa o caminho completo do arquivo de entrada como por exemplo ```/home/gus/Documentos/tec-turing/teste_sipser.txt```
-4. O arquivo de saida será gerado na mesma pasta e nome do arquivo de entrada com extenção ```.out```. Exemplo: ```/home/gus/Documentos/tec-turing/teste_sipser.txt.out```
+1. Dentro da pasta do projeto, execute ```cabal update``
+2. Dentro da pasta do projeto, execute ```cabal run```
+3. O programa irá pedir o caminho completo do arquivo de entrada .in
+4. Dê ao programa o caminho completo do arquivo de entrada como por exemplo ```/home/gus/Documentos/tec-turing/teste_sipser.txt```
+5. O arquivo de saida será gerado na mesma pasta e nome do arquivo de entrada com extenção ```.out```. Exemplo: ```/home/gus/Documentos/tec-turing/teste_sipser.txt.out```
