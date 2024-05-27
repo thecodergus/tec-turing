@@ -76,7 +76,7 @@ converterParaSipser (MaquinaTuring estados' alfabeto' transicoes' estadoInicial'
             [passoSeis' e] ++
             passoSeis'' e alfabeto''' ++
             passoSeis''' e alfabeto''' alfabeto''' ++
-            passoSeis'''' e ++
+            [passoSeis'''' e] ++
             [passoSeis''''' e] ++
             passoSeis es alfabeto'''
 
@@ -111,11 +111,8 @@ converterParaSipser (MaquinaTuring estados' alfabeto' transicoes' estadoInicial'
 
 
                 -- Ao encontrar o final da fita, retornar para o estado que encontrou o #
-                passoSeis'''' :: Estado -> [Transicao]
-                passoSeis'''' (Estado e') = [
-                        Transicao {simboloSerEscrito = SimboloSerEscrito Vazio, proximoEstado = Estado ("[" ++ e' ++ "]-retornar"), simboloAtual = SimboloAtual Vazio, estadoAtual = Estado ("[" ++ e' ++ "]-mover-direita-{}"), direcao = Esquerda},
-                        Transicao {simboloSerEscrito = Manter, proximoEstado = Estado ("[" ++ e' ++ "]-retornar"), simboloAtual = Todos, estadoAtual = Estado ("[" ++ e' ++ "]-retornar"), direcao = Esquerda}
-                    ] 
+                passoSeis'''' :: Estado -> Transicao
+                passoSeis'''' (Estado e') = Transicao {simboloSerEscrito = Manter, proximoEstado = Estado ("[" ++ e' ++ "]-retornar"), simboloAtual = Todos, estadoAtual = Estado ("[" ++ e' ++ "]-retornar"), direcao = Esquerda}
 
                 -- -- Ao encontrar o #, retornar para o estado que encontrou o #
                 passoSeis''''' :: Estado -> Transicao
