@@ -22,11 +22,11 @@ main = do
             let maquina' = instrucoesParaMaquinaTuring (tipo, instrucoes)
             case tipo of
                 Sipser -> do
-                    let maquinaSipser = converterParaSipser maquina'
+                    let maquinaSipser = conveterParaDuplamenteInfinita maquina'
                     _ <- salvarArquivo maquinaSipser (pathFile ++ ".out")
                     return ()
                 DuplamenteInfinita -> do
-                    let maquinaDuplamenteInfinita = conveterParaDuplamenteInfinita maquina'
+                    let maquinaDuplamenteInfinita = converterParaSipser maquina'
                     _ <- salvarArquivo maquinaDuplamenteInfinita (pathFile ++ ".out")
                     return ()
 
