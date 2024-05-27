@@ -1,5 +1,9 @@
 # Trabalho de Teoria da computação
 
+
+![Ateu, homosexual e pai da ciência da computação](imgs/2ms2j3.jpg)
+
+
 ## Titulo
 
 Tradutor de Modelos de Máquina de Turing
@@ -77,3 +81,6 @@ Quando a entrada é uma maquina de Turing de fita duplamente infinita e a saída
 3. O programa irá pedir o caminho completo do arquivo de entrada .in
 4. Dê ao programa o caminho completo do arquivo de entrada como por exemplo ```/home/gus/Documentos/tec-turing/teste_sipser.txt```
 5. O arquivo de saida será gerado na mesma pasta e nome do arquivo de entrada com extenção ```.out```. Exemplo: ```/home/gus/Documentos/tec-turing/teste_sipser.txt.out```
+
+
+![Ateu, homosexual e pai da ciência da computação](imgs/main-qimg-8b4613daadb2657469f756c84bb0d712-lq.jpeg)
