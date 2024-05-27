@@ -60,3 +60,19 @@ Quando a entrada é uma maquina de Turing de fita duplamente infinita e a saída
 - Vai movendo todos os simbolos da fita para a direita até encontrar um espaço em branco que vira hashtag(#).
 - Quando encontrar um espaço em branco que vira hashtag(), ele vai para a esquerda até encontrar o simbolo hashtag(#) mais a esquerda e mover a cabeça da fita para a direita, encontrando o novo espaço em branco.
 - Quando encontrar a nova posição em branco, o programa vai voltar a executar normalmente.
+
+
+## Tutoriais
+
+### Instalando Cabal
+
+1. Execute ```curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | bash```  no terminal
+2. Aperte enter sempre que aparece qualquer tipo de pergunta ou seleção de itens
+3. Reinicie o terminal
+
+### Executando o algoritmo
+
+1. Dentro da pasta do projeto, execute ```cabal run```
+2. O programa irá pedir o caminho completo do arquivo de entrada .in
+3. Dê ao programa o caminho completo do arquivo de entrada como por exemplo ```/home/gus/Documentos/tec-turing/teste_sipser.txt```
+4. O arquivo de saida será gerado na mesma pasta e nome do arquivo de entrada com extenção ```.out```. Exemplo: ```/home/gus/Documentos/tec-turing/teste_sipser.txt.out```
